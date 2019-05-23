@@ -8,7 +8,7 @@ const global = css`
 body {
     margin: 0;
     margin-top: 50px;
-    font-family: sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 header {
