@@ -1,0 +1,9 @@
+.idea
+.DS_Store
+node_modules
+*__snapshots__
+coverage
+.env*
+build
+.cache
+.history

@@ -1,0 +1,61 @@
+{
+  "name": "movie-search",
+  "version": "0.1.0",
+  "dependencies": {
+    "@emotion/core": "^10.0.10",
+    "axios": "^0.18.0",
+    "normalize.css": "^8.0.1",
+    "openplayerjs": "^1.6.0",
+    "react": "^16.5.2",
+    "react-bootstrap": "^1.0.0-beta.8",
+    "react-bootstrap-typeahead": "^3.4.3",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.0.5",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "store": "^2.0.12"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-stage-0": "^7.0.0",
+    "@storybook/addon-a11y": "^4.1.4",
+    "@storybook/addon-actions": "^4.1.4",
+    "@storybook/addon-backgrounds": "^4.1.4",
+    "@storybook/addon-centered": "^4.1.4",
+    "@storybook/addon-knobs": "^4.1.4",
+    "@storybook/addon-links": "^4.1.4",
+    "@storybook/addon-viewport": "^4.1.4",
+    "@storybook/addons": "^4.1.4",
+    "@storybook/react": "^4.1.4",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-app": "^5.0.4",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.93.0",
+    "jest": "^23.6.0",
+    "jest-extended": "^0.11.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "[ -d coverage ] && rm -R coverage; jest --config ./jest.config.json -u --coverage",
+    "lint": "eslint ./src",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9001 -s ./public -c .storybook",
+    "flow": "flow"
+  },
+  "browserslist": [
+    "last 5 versions",
+    "ie >= 11",
+    "safari >= 9"
+  ]
+}

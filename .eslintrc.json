@@ -1,0 +1,104 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb-base"
+  ],
+  "settings": {
+    "react": {
+      "version": "16.8.6"
+    }
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": 0,
+    "no-undef": 0,
+    "no-case-declarations": 0,
+    "no-empty": 0,
+    "object-curly-spacing": 0,
+    "import/no-dynamic-require": 0,
+    "global-require": 0,
+    "func-names": 0,
+    "no-plusplus": 0,
+    "no-param-reassign": 0,
+    "operator-linebreak": 0,
+    "no-restricted-properties": 0,
+    "no-template-curly-in-string": 0,
+    "arrow-parens": [
+      2,
+      "as-needed"
+    ],
+    "import/no-named-as-default": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.stories.js",
+          "**/*.test.js"
+        ]
+      }
+    ],
+    "comma-dangle": [
+      2,
+      {
+        "functions": "ignore",
+        "objects": "ignore",
+        "arrays": "ignore"
+      }
+    ],
+    "prefer-destructuring": [
+      "error",
+      {
+        "VariableDeclarator": {
+          "array": false,
+          "object": true
+        },
+        "AssignmentExpression": {
+          "array": false,
+          "object": false
+        }
+      },
+      {
+        "enforceForRenamedProperties": false
+      }
+    ],
+    "no-restricted-globals": 0,
+    "indent": [
+      2,
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "max-len": [
+      2,
+      140,
+      4,
+      {
+        "ignoreUrls": true,
+        "ignoreComments": true,
+        "ignorePattern": "true"
+      }
+    ],
+    "class-methods-use-this": 0,
+    "no-unused-vars": "error",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": [
+      "error"
+    ]
+  }
+}
