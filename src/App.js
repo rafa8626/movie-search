@@ -1,7 +1,7 @@
 import 'normalize.css';
-import React, { lazy, Suspense, Fragment } from 'react';
+import React, { lazy, Suspense } from 'react';
 import {
-    BrowserRouter, Route, Switch, Redirect
+    BrowserRouter, Route, Switch
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Global } from '@emotion/core';
@@ -12,7 +12,6 @@ import Loader from './Components/Loader/Loader';
 import store from './Store/Store';
 
 const AsyncMainPage = lazy(() => import('./Pages/Main/Main'));
-const AsyncError = lazy(() => import('./Pages/Error/Error'));
 const AsyncNotFound = lazy(() => import('./Pages/NotFound/NotFound'));
 
 const App = () => (

@@ -2,23 +2,57 @@
 // @flow
 import { jsx } from '@emotion/core';
 import { Component } from 'react';
+import { connect } from 'react-redux';
 
+import Layout from '../../Layouts/OneColum';
 import Search from '../../Components/Search/Search';
+import * as itemActions from '../../Store/Movie/Movie';
 import mainStyles from './Main.styles';
+import MovieItem from '../../Components/Item/Item';
 
-class Main extends Component<{}> {
+type Props = {
+    items: Array<Object>,
+    addItem: Function,
+};
+
+class Main extends Component<Props> {
+    static defaultProps = {
+        movies: [],
+        addItem: () => { },
+    }
+
     render() {
         return (
-            <div id="main" css={mainStyles}>
-                <Search
-                    labelKey='name'
-                    addedMessage='(selected)'
-                    filterItems
-                    changeHandler={() => { }}
-                />
-            </div>
+            <Layout
+                css={mainStyles}
+                header={
+                    <Search
+                        labelKey='name'
+                        addedMessage='(selected)'
+                        filterItems
+                        changeHandler={this.props.addItem}
+                    />
+                }
+                content={this.props.items.length ?
+                    this.props.items.map(item => (
+                        <MovieItem key={item.id} item={item} />
+                    )) :
+                    <p>No results found</p>
+                }
+            />
         );
     }
 }
 
-export default Main;
+// Connection with Redux
+const mapStateToProps = state => ({
+    ...state.movies,
+});
+
+const mapDispatchToProps = {
+    ...itemActions,
+};
+
+const Container = connect(mapStateToProps, mapDispatchToProps)(Main);
+
+export default Container;

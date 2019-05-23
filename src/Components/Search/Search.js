@@ -4,17 +4,11 @@
 import { jsx } from '@emotion/core';
 import { Component } from 'react';
 import type { Node } from 'react';
-import Form from 'react-bootstrap/Form'
 import { AsyncTypeahead, Highlighter } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 import Api from '../../Utils/Api';
 import searchStyles from './Search.styles';
-// import typeaheadStyles from './Typeahead.styles';
-
-/**
- * 
- */
 
 type Props = {
     labelKey: string,
@@ -25,6 +19,7 @@ type Props = {
 
 type State = {
     isLoading: boolean,
+    type: 'movie' | 'tv',
     options: Array<Object>,
 };
 
@@ -39,6 +34,7 @@ class Search extends Component<Props, State> {
         this.onChange = this.onChange.bind(this);
         this.formatMenuItems = this.formatMenuItems.bind(this);
         this.searchItem = this.searchItem.bind(this);
+        this.handleOptionChange = this.handleOptionChange.bind(this);
         this.api = new Api();
     }
 
@@ -62,6 +58,8 @@ class Search extends Component<Props, State> {
 
     searchItem: (query: string) => void
 
+    handleOptionChange: (e: Object) => void
+
     /**
      * Set the reference passed down from parent component and use that to display the autofill helper
      * @returns {void}
@@ -79,7 +77,7 @@ class Search extends Component<Props, State> {
      * @memberof Typeahead
      */
     onChange(item: Array<Object>) {
-        this.props.changeHandler(item);
+        this.props.changeHandler(item[0]);
         if (this.typeaheadRef) {
             setTimeout(() => {
                 if (this.typeaheadRef !== null) {
@@ -87,6 +85,10 @@ class Search extends Component<Props, State> {
                 }
             }, 0);
         }
+    }
+
+    handleOptionChange(e: Object) {
+        this.setState({ type: e.target.value });
     }
 
     /**
@@ -117,17 +119,18 @@ class Search extends Component<Props, State> {
      */
     async searchItem(query: string) {
         this.setState({ isLoading: true });
-        const response = await this.api.get('movie', { query });
-        let options = response.data || [];
 
-        // Format search
+        const response = await this.api.get('multi', { query });
+        let options = response.data || [];
         if (options.length) {
-            options = options.map(item => ({
+            options = options.filter(item => item.media_type !== 'person').map(item => ({
                 ...item,
-                name: item.original_title,
+                name: item.media_type === 'movie' ? item.original_title : item.original_name,
                 value: item.id,
+                type: item.media_type,
             }));
         }
+
         this.setState({ isLoading: false, options, });
     }
 
@@ -178,22 +181,6 @@ class Search extends Component<Props, State> {
                     ref={typeahead => this.setTypeaheadRef(typeahead)}
                     onChange={this.onChange}
                 />
-                <div className="form-group">
-                    <Form.Check
-                        type='radio'
-                        custom
-                        id='movie'
-                        name='type'
-                        label='Movies'
-                    />
-                    <Form.Check
-                        type='radio'
-                        custom
-                        id='series'
-                        name='type'
-                        label='Series'
-                    />
-                </div>
             </div>
         );
     }

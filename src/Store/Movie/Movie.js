@@ -9,7 +9,7 @@ export const MOVIE_REMOVE = 'MOVIE_REMOVE';
  * @param {object} movie
  * @returns {void}
  */
-export const addMovie = (movie: Object) => (dispatch: Function) => {
+export const addItem = (movie: Object) => (dispatch: Function) => {
     dispatch({
         type: MOVIE_ADD,
         payload: movie,
@@ -22,7 +22,7 @@ export const addMovie = (movie: Object) => (dispatch: Function) => {
  * @param {number} movieId
  * @returns {void}
  */
-export const removeMovie = (movieId: number) => (dispatch: Function) => {
+export const removeItem = (movieId: number) => (dispatch: Function) => {
     dispatch({
         type: MOVIE_REMOVE,
         payload: movieId,
@@ -30,7 +30,7 @@ export const removeMovie = (movieId: number) => (dispatch: Function) => {
 };
 
 const initialState = {
-    movies: [],
+    items: [],
 };
 
 /**
@@ -45,14 +45,14 @@ export default function movies(state: Object = initialState, action: Object) {
         case MOVIE_ADD:
             return {
                 ...state,
-                movies
+                items: [...state.items, action.payload]
             };
         case MOVIE_REMOVE:
-            const idx = state.movies.findIndex(item => item.id === action.payload);
+            const idx = state.items.findIndex(item => item.id === action.payload);
             if (idx > -1) {
                 return {
                     ...state,
-                    movies: [...state.movies.slice(0, idx), ...state.movies.slice(idx + 1)]
+                    items: [...state.items.slice(0, idx), ...state.items.slice(idx + 1)]
                 };
             }
             return state;
