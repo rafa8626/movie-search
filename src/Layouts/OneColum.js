@@ -24,7 +24,7 @@ const OneColumn = (props: Props) => (
             </section>
         </main>
         <footer>
-            <p>Copyright {new Date().getFullYear()}</p>
+            <p>Copyright &copy; {new Date().getFullYear()}</p>
         </footer>
     </Fragment>
 );

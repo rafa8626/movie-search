@@ -2,6 +2,8 @@ import { css } from '@emotion/core';
 
 const searchStyles = css`
 position: relative;
+width: 100%;
+margin-top: 7px;
 
 input[type=radio] {
     margin-right: 5px;
