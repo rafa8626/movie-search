@@ -10,7 +10,7 @@ class Api {
      */
     constructor(noCache = true) {
         this.instance = axios.create({
-            baseURL: 'https://api.themoviedb.org/3/search/',
+            baseURL: 'https://api.themoviedb.org/3/',
         });
         this.params = {
             noCache,
@@ -41,23 +41,21 @@ class Api {
      */
     request(type, params = null) {
         return new Promise(resolve => {
-            params.api_key = process.env.REACT_APP_API_KEY;
-
             if (!params) {
                 params = {};
             }
 
-            params.append_to_response = 'videos,images';
-
+            params.api_key = process.env.REACT_APP_API_KEY;
             if (this.params.noCache) {
                 params.nocache = Date.now();
             }
 
+            const stub = type === 'multi' ? 'search/' : '';
             const query = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
-            const instance = this.instance.get(`${type}${query ? `?${query}` : ''}`);
+            const instance = this.instance.get(`${stub}${type}${query ? `?${query}` : ''}`);
 
             return instance
-                .then(response => resolve({ error: null, data: response.data.results }))
+                .then(response => resolve({ error: null, data: response.data }))
                 .catch(error => resolve({ error }));
         });
     }

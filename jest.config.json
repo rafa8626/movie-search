@@ -1,0 +1,17 @@
+{
+    "testURL": "https://medcore-api-dev.medsims.com",
+    "setupFiles": [
+        "./src/Utils/JestMocks.js"
+    ],
+    "setupFilesAfterEnv": ["jest-extended"],
+    "testRegex": "./src/.*.test.js$",
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+        "./src/*/.*.(styles|props|.stories).js",
+        "./node_modules/*"
+    ],
+    "moduleFileExtensions": [
+        "js",
+        "jsx"
+    ]
+}

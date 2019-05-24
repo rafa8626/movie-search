@@ -34,6 +34,13 @@ section {
     background-attachment: fixed;
 }
 
+#main {
+    height: 100vh;
+    margin-top: 0;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 footer {
     text-align: right;
     padding: 0 50px;

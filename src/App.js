@@ -11,7 +11,8 @@ import globalStyles from './Styles/Global';
 import Loader from './Components/Loader/Loader';
 import store from './Store/Store';
 
-const AsyncMainPage = lazy(() => import('./Pages/Main/Main'));
+const AsyncMain = lazy(() => import('./Pages/Main/Main'));
+const AsyncDetails = lazy(() => import('./Pages/Details/Details'));
 const AsyncNotFound = lazy(() => import('./Pages/NotFound/NotFound'));
 
 const App = () => (
@@ -20,9 +21,10 @@ const App = () => (
             <Suspense fallback={<Loader />}>
                 <Global styles={globalStyles} />
                 <Switch>
-                    <Route exact strict path='/'>
-                        <AsyncMainPage />
-                    </Route>
+                    <Route exact strict path='/'
+                        render={params => <AsyncMain {...params} />}
+                    />
+                    <Route path='/:type/:item' render={params => <AsyncDetails {...params} />} />
                     <Route path='/not-found'>
                         <AsyncNotFound />
                     </Route>

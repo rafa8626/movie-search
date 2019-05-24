@@ -8,17 +8,38 @@ import Layout from '../../Layouts/OneColum';
 import Search from '../../Components/Search/Search';
 import * as itemActions from '../../Store/Movie/Movie';
 import mainStyles from './Main.styles';
-import MovieItem from '../../Components/Item/Item';
+import Item from '../../Components/Item/Item';
+import Api from '../../Utils/Api';
 
 type Props = {
     items: Array<Object>,
     addItem: Function,
 };
 
-class Main extends Component<Props> {
+type State = {
+    config: Object,
+}
+
+class Main extends Component<Props, State> {
+    api: Api;
+
+    constructor() {
+        super();
+        this.api = new Api();
+    }
+
     static defaultProps = {
-        movies: [],
+        items: [],
         addItem: () => { },
+    }
+
+    state = {
+        config: {},
+    }
+
+    async componentDidMount() {
+        const response = await this.api.get('configuration');
+        this.setState({ config: response.data });
     }
 
     render() {
@@ -31,11 +52,16 @@ class Main extends Component<Props> {
                         addedMessage='(selected)'
                         filterItems
                         changeHandler={this.props.addItem}
+                        api={this.api}
+                        config={this.state.config}
                     />
                 }
                 content={this.props.items.length ?
                     this.props.items.map(item => (
-                        <MovieItem key={item.id} item={item} />
+                        <Item
+                            key={item.id}
+                            item={item}
+                        />
                     )) :
                     <p>No results found</p>
                 }

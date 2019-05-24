@@ -7,12 +7,13 @@ import type { Node } from 'react';
 import { AsyncTypeahead, Highlighter } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-import Api from '../../Utils/Api';
 import searchStyles from './Search.styles';
 
 type Props = {
     labelKey: string,
     addedMessage?: string | Node,
+    api: Object,
+    config: Object,
     filterItems: Array<Object>,
     changeHandler: Function,
 };
@@ -26,8 +27,6 @@ type State = {
 class Search extends Component<Props, State> {
     typeaheadRef: *;
 
-    api: Api;
-
     constructor() {
         super();
         this.setTypeaheadRef = this.setTypeaheadRef.bind(this);
@@ -35,7 +34,6 @@ class Search extends Component<Props, State> {
         this.formatMenuItems = this.formatMenuItems.bind(this);
         this.searchItem = this.searchItem.bind(this);
         this.handleOptionChange = this.handleOptionChange.bind(this);
-        this.api = new Api();
     }
 
     static defaultProps = {
@@ -120,14 +118,17 @@ class Search extends Component<Props, State> {
     async searchItem(query: string) {
         this.setState({ isLoading: true });
 
-        const response = await this.api.get('multi', { query });
-        let options = response.data || [];
+        const { config, api } = this.props;
+        const response = await api.get('multi', { query });
+        let options = response.data && response.data.results ? response.data.results : [];
+
         if (options.length) {
             options = options.filter(item => item.media_type !== 'person').map(item => ({
                 ...item,
                 name: item.media_type === 'movie' ? item.original_title : item.original_name,
                 value: item.id,
                 type: item.media_type,
+                url: `${config.images.base_url}${config.images.still_sizes[1]}${item.poster_path}`
             }));
         }
 

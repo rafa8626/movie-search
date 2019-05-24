@@ -1,7 +1,12 @@
 import React from 'react';
+import 'dotenv/config';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-import '../../Utils/JestMocks';
 import Loader from './Loader';
+
+jest.setTimeout(process.env.REACT_APP_JEST_TIMEOUT);
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('<Loader />', () => {
     let enzymeWrapper;

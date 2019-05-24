@@ -4,6 +4,9 @@
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "axios": "^0.18.0",
+    "dotenv": "^8.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.1",
     "normalize.css": "^8.0.1",
     "openplayerjs": "^1.6.0",
     "react": "^16.5.2",

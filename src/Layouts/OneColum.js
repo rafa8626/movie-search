@@ -14,11 +14,11 @@ const OneColumn = (props: Props) => (
     <Fragment>
         <header>{props.header}</header>
         <main>
-            <section id="hero">
+            {/* <section id="hero">
                 <div className="section-inner">
                     <h1>Movie Search</h1>
                 </div>
-            </section>
+            </section> */}
             <section id="main">
                 {props.content}
             </section>
