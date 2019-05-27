@@ -1,6 +1,6 @@
 # Movie Search
 
-Check details of your favorite movies and/or series using this amazing search engine!
+Check details of your favorite movies and/or series using this simple but powerful search engine, using [The Movie DB API](https://www.themoviedb.org/).
 
 ## Resources
 
