@@ -1,31 +1,45 @@
 // @flow
 
-export const MOVIE_ADD = 'MOVIE_ADD';
-export const MOVIE_REMOVE = 'MOVIE_REMOVE';
+export const ITEM_ADD = 'ITEM_ADD';
+export const ITEM_REMOVE = 'ITEM_REMOVE';
+export const ITEM_LOAD = 'ITEM_LOAD';
 
 /**
- * Add a movie to the list
+ * Load a list of items (movies or series)
  *
- * @param {object} movie
+ * @param {object[]} items
  * @returns {void}
  */
-export const addItem = (movie: Object) => (dispatch: Function) => {
+export const loadItems = (items: Array<Object>) => (dispatch: Function) => {
     dispatch({
-        type: MOVIE_ADD,
-        payload: movie,
+        type: ITEM_LOAD,
+        payload: items,
     });
 };
 
 /**
- * Remove a movie from the existing list
+ * Add a movie/serie to the list
+ *
+ * @param {object} movie
+ * @returns {void}
+ */
+export const addItem = (item: Object) => (dispatch: Function) => {
+    dispatch({
+        type: ITEM_ADD,
+        payload: item,
+    });
+};
+
+/**
+ * Remove a movie/serie from the existing list
  *
  * @param {number} movieId
  * @returns {void}
  */
-export const removeItem = (movieId: number) => (dispatch: Function) => {
+export const removeItem = (itemId: number) => (dispatch: Function) => {
     dispatch({
-        type: MOVIE_REMOVE,
-        payload: movieId,
+        type: ITEM_REMOVE,
+        payload: itemId,
     });
 };
 
@@ -40,14 +54,19 @@ const initialState = {
  * @param {string} action  The action to update the store's element.
  * @returns {void}
  */
-export default function movies(state: Object = initialState, action: Object) {
+export default function movieSearch(state: Object = initialState, action: Object) {
     switch (action.type) {
-        case MOVIE_ADD:
+        case ITEM_LOAD:
+            return {
+                ...state,
+                items: action.payload,
+            };
+        case ITEM_ADD:
             return {
                 ...state,
                 items: [...state.items, action.payload]
             };
-        case MOVIE_REMOVE:
+        case ITEM_REMOVE:
             const idx = state.items.findIndex(item => item.id === action.payload);
             if (idx > -1) {
                 return {

@@ -1,10 +1,10 @@
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
-import movies from './Movie/Movie';
+import movieSearch from './Item/Item';
 
 const rootReducer = combineReducers({
-    movies,
+    movieSearch,
 });
 
 const middleware = [thunk];

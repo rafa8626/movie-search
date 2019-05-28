@@ -5,6 +5,7 @@ import { jsx } from '@emotion/core';
 import { Component } from 'react';
 import type { Node } from 'react';
 import { AsyncTypeahead, Highlighter } from 'react-bootstrap-typeahead';
+import store from 'store';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 import searchStyles from './Search.styles';
@@ -76,6 +77,17 @@ class Search extends Component<Props, State> {
      */
     onChange(item: Array<Object>) {
         this.props.changeHandler(item[0]);
+        const saved = store.get('ms-search-items') || [];
+        if (saved && saved.length) {
+            const idx = saved.findIndex(obj => obj.id === item[0].id && obj.type === item[0].type);
+            if (idx === -1) {
+                saved.push(item[0]);
+                store.set('ms-search-items', saved);
+            }
+        } else {
+            saved.push(item[0]);
+            store.set('ms-search-items', saved);
+        }
         if (this.typeaheadRef) {
             setTimeout(() => {
                 if (this.typeaheadRef !== null) {
