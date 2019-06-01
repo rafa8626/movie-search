@@ -10,8 +10,8 @@ html {
 }
 body {
     margin: 0;
-    margin-top: 50px;
     font-family: 'Raleway', sans-serif;
+    font-size: 16px;
 }
 
 header {
@@ -21,21 +21,17 @@ header {
     right: 0;
 }
 
-section {
-    height: 50vh;
-    margin-top: -10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-size: cover;
-    background-position: top;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+main {
+    margin-top: 6%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 #main {
-    height: 100vh;
+    height: auto;
     margin-top: 0;
     flex-direction: column;
     align-items: flex-start;
@@ -45,8 +41,13 @@ footer {
     text-align: right;
     padding: 0 50px;
 }
-#hero h1 {
-    font-size: 3em;
+#hero {
+    height: 100vh;
+    margin-top: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    background-attachment: fixed;
 }
 
 section h2 {
@@ -57,13 +58,33 @@ section h3 {
     font-size: 1.5em;
 }
 
-header a {
-    text-decoration: none;
-    color: black;
-}
+header {
+    display: flex;
+    background: white;
 
-#hero {
-    background-image: linear-gradient(rgba(255,255,255,0.75),rgba(255,255,255,0.75)), url('/images/posters.jpg');
+    .title {
+        flex: 0 0 30%;
+    }
+
+    .date {
+        color: #666;
+        font-size: 0.8em;
+        margin-left: 10px;
+    }
+
+    .details {
+        width: 50%;
+        margin: auto;
+    }
+
+    .back {
+        text-align: right;
+        width: 100%;
+    }
+
+    a {
+        text-decoration: none;
+    }
 }
 mark {
     padding: .2em;
@@ -134,6 +155,23 @@ ol, ul {
     clip: rect(0,0,0,0);
     border: 0;
 }
+.details {
+    display: flex;
+    width: 80%;
+    margin: 20px auto 0;
+
+    .poster {
+        margin-right: 15px;
+    }
+
+    .tagline {
+        font-size: 0.8em;
+        text-align: right;
+        font-style: italic;
+        text-decoration: underline;
+    }
+}
+
 `;
 
 export default global;

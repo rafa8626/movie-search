@@ -1,7 +1,7 @@
 /** @jsx jsx */
 // @flow
 import { jsx } from '@emotion/core';
-import { Component } from 'react';
+import { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import engine from 'store/src/store-engine';
 import store from 'store/storages/cookieStorage';
@@ -68,6 +68,8 @@ class Main extends Component<Props, State> {
         return (
             <Layout
                 css={mainStyles}
+                title='Movie Search'
+                hero='/images/posters.jpg'
                 header={
                     <Search
                         labelKey='name'
@@ -78,14 +80,18 @@ class Main extends Component<Props, State> {
                         config={this.state.config}
                     />
                 }
-                content={this.props.items.length ?
-                    this.props.items.map(item => (
-                        <Item
-                            key={item.id}
-                            item={item}
-                        />
-                    )) :
-                    <p>No results found</p>
+                content={
+                    <Fragment>
+                        {this.props.items.length ?
+                            this.props.items.map(item => (
+                                <Item
+                                    key={item.id}
+                                    item={item}
+                                />
+                            )) :
+                            <p>No items searched yet</p>
+                        }
+                    </Fragment>
                 }
             />
         );

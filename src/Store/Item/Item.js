@@ -3,6 +3,8 @@
 export const ITEM_ADD = 'ITEM_ADD';
 export const ITEM_REMOVE = 'ITEM_REMOVE';
 export const ITEM_LOAD = 'ITEM_LOAD';
+export const ITEM_SAVE_DETAILS = 'ITEM_SAVE_DETAILS';
+export const ITEM_LOAD_DETAILS = 'ITEM_LOAD_DETAILS';
 
 /**
  * Load a list of items (movies or series)
@@ -43,12 +45,31 @@ export const removeItem = (itemId: number) => (dispatch: Function) => {
     });
 };
 
+export const saveDetails = (details: Object) => (dispatch: Function) => {
+    dispatch({
+        type: ITEM_SAVE_DETAILS,
+        payload: details
+    });
+};
+
+export const loadDetails = (itemId: number, type: 'movie' | 'tv') => (dispatch: Function) => {
+    dispatch({
+        type: ITEM_LOAD_DETAILS,
+        payload: { itemId, type, }
+    });
+};
+
 const initialState = {
     items: [],
+    details: {
+        movie: [],
+        tv: [],
+    },
+    currentItem: {},
 };
 
 /**
- * Movie reducer
+ * Items reducer
  *
  * @param {object} [state=initialState]  The initial set of elements to be updated once actions are executed.
  * @param {string} action  The action to update the store's element.
@@ -75,6 +96,23 @@ export default function movieSearch(state: Object = initialState, action: Object
                 };
             }
             return state;
+        case ITEM_LOAD_DETAILS:
+            const details = action.payload.details[action.payload.type].find(item => item.id === action.payload.itemId);
+            if (details) {
+                return {
+                    ...state,
+                    currentItem: {
+                        ...state.currentItem,
+                        ...details,
+                    }
+                };
+            }
+            return state;
+        case ITEM_SAVE_DETAILS:
+            return {
+                ...state,
+                details: [...state.details, action.payload]
+            };
         default:
             return state;
     }
