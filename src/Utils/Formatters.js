@@ -26,20 +26,19 @@ export function formatItemDetails(item: Object, config: Object) {
     if (date) {
         date = date.replace(/(\d{4}).*/, '$1');
     } else {
-        date = `(${firstDate.replace(/(\d{4}).*/, '$1')} - `;
+        date = `${firstDate.replace(/(\d{4}).*/, '$1')} - `;
         if (lastDate) {
             date += `${lastDate.replace(/(\d{4}).*/, '$1')}`
         } else {
-            date += 'present'
+            date += 'present';
         }
-        date += ')';
     }
 
     const images = item.images.backdrops.map(image => `${config.images.base_url}${config.images.still_sizes[3]}${image.file_path}`);
     const genresList = genres && genres.length ? genres.map(genre => genre.name) : [];
     const creators = createdBy && createdBy.length ? createdBy.map(creator => ({
         id: creator.id,
-        profile: creator.profile_path ? `${config.images.base_url}${config.images.still_sizes[3]}${creator.profile_path}` : '',
+        profile: creator.profile_path ? `${config.images.base_url}${config.images.still_sizes[2]}${creator.profile_path}` : '',
         name: creator.name,
     })) : [];
 
@@ -53,7 +52,7 @@ export function formatItemDetails(item: Object, config: Object) {
         duration,
         tagline,
         bgImg: `${config.images.base_url}${config.images.still_sizes[3]}${item.backdrop_path}`,
-        poster: `${config.images.base_url}${config.images.still_sizes[3]}${poster}`,
+        poster: `${config.images.base_url}${config.images.still_sizes[2]}${poster}`,
         videos,
         images,
         genres: genresList,

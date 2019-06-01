@@ -10,6 +10,7 @@ import expire from 'store/plugins/expire';
 import Api from '../../Utils/Api';
 import Layout from '../../Layouts/OneColum';
 import { formatItemDetails } from '../../Utils/Formatters';
+import isEmpty from '../../Utils/Common';
 
 /**
  * Item Details.
@@ -57,7 +58,7 @@ class Details extends Component<Props, State> {
     }
 
     render() {
-        if (!this.state.details) {
+        if (isEmpty(this.state.details)) {
             return null;
         }
 
@@ -70,7 +71,7 @@ class Details extends Component<Props, State> {
                 title={
                     <Fragment>
                         {details.title}
-                        <span className='date'>{details.date}</span>
+                        <span className='date'>({details.date})</span>
                     </Fragment>
                 }
                 content={
@@ -83,9 +84,9 @@ class Details extends Component<Props, State> {
                             <p>{details.overview}</p>
                             <div>
                                 {details.duration && <p>{details.duration}</p>}
-                                {details.genres && details.genres.length && <p><strong>Genres:</strong> {details.genres.join(', ')}</p>}
+                                {(details.genres && details.genres.length > 0) && <p><strong>Genres:</strong> {details.genres.join(', ')}</p>}
                             </div>
-                            {details.creators && details.creators.length &&
+                            {(details.creators && details.creators.length > 0) &&
                                 <div className='creators'>
                                     {details.creators.map(creator => (
                                         <div className='creator' key={creator.id}>
