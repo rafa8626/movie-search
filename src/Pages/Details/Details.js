@@ -63,6 +63,7 @@ class Details extends Component<Props, State> {
         }
 
         const { details } = this.state;
+        const genres = (details.genres && details.genres.length > 0) ? details.genres.join(', ') : '';
 
         return (
             <Layout
@@ -75,29 +76,40 @@ class Details extends Component<Props, State> {
                     </Fragment>
                 }
                 content={
-                    <div className='details'>
-                        <div className='poster'>
-                            <img src={details.poster} alt={details.title} />
-                        </div>
-                        <div className='info'>
-                            {details.tagline && <p className='tagline'>- {details.tagline}</p>}
-                            <p>{details.overview}</p>
-                            <div>
-                                {details.duration && <p>{details.duration}</p>}
-                                {(details.genres && details.genres.length > 0) && <p><strong>Genres:</strong> {details.genres.join(', ')}</p>}
+                    <Fragment>
+                        <div className='details'>
+                            <div className='poster'>
+                                <img src={details.poster} alt={details.title} />
                             </div>
-                            {(details.creators && details.creators.length > 0) &&
-                                <div className='creators'>
-                                    {details.creators.map(creator => (
-                                        <div className='creator' key={creator.id}>
-                                            { creator.profile && <img src={creator.profile} alt={creator.name} />}
-                                            <span>{creator.name}</span>
-                                        </div>
-                                    ))}
+                            <div className='info'>
+                                {details.tagline && <p className='tagline'>- {details.tagline}</p>}
+                                <p>{details.overview}</p>
+                                <div>
+                                    {details.duration && <p>{details.duration}</p>}
+                                    {genres && <p><strong>Genres:</strong> {genres}</p>}
                                 </div>
-                            }
+                                {(details.creators && details.creators.length > 0) &&
+                                    <div className='creators'>
+                                        <h2>Creator(s)</h2>
+                                        {details.creators.map(creator => (
+                                            <div className='creator' key={creator.id}>
+                                                { creator.profile && <img src={creator.profile} alt={creator.name} />}
+                                                <span>{creator.name}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                }
+                            </div>
                         </div>
-                    </div>
+                        {details.videos.length && <div className='videos'>
+                            <h2>Videos</h2>
+                            {details.videos.map((video, index) => (
+                                <iframe key={`video-${index}`} title={`${details.title}-${index}`} width="560" height="315" src={video} frameBorder='0'
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen></iframe>
+                            ))}
+                        </div>}
+                    </Fragment>
                 }
             />
         );
