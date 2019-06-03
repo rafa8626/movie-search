@@ -11,8 +11,9 @@ export function formatItem(item: Object, config: Object) {
 
 export function formatItemDetails(item: Object, config: Object) {
     const {
-        id, imdb_id: imdbId, homepage, release_date: releaseDate, title, name, tagline, genres, overview, duration,
-        created_by: createdBy, poster_path: poster, first_air_date: firstDate, last_air_date: lastDate
+        id, imdb_id: imdbId, homepage, release_date: releaseDate, title, name, tagline, genres, overview,
+        created_by: createdBy, poster_path: poster, first_air_date: firstDate, last_air_date: lastDate,
+        vote_average: rating
     } = item;
 
     const videos = item.videos.results.map(video => {
@@ -48,16 +49,12 @@ export function formatItemDetails(item: Object, config: Object) {
         imdbId,
         homepage,
         date,
-        duration,
         tagline,
         bgImg: `${config.images.base_url}${config.images.still_sizes[3]}${item.backdrop_path}`,
         poster: `${config.images.base_url}${config.images.still_sizes[2]}${poster}`,
         videos,
         genres: genresList,
         creators,
+        rating,
     };
-}
-
-export function extractYear(date: string) {
-
 }

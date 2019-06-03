@@ -19,6 +19,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
+    z-index: 1;
 }
 
 main {
@@ -97,6 +98,7 @@ header {
     .back {
         text-align: right;
         width: 100%;
+        margin-right: 20px;
     }
 
     a {
@@ -194,6 +196,8 @@ ol, ul {
         .creator {
             span {
                 display: block;
+                font-weight: 700;
+                font-size: 0.8em;
             }
         }
     }
@@ -204,6 +208,22 @@ ol, ul {
 .videos {
     width: 80%;
     margin: 20px auto 0;
+
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        margin-bottom: 20px;
+
+        &>iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
 }
 
 `;

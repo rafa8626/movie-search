@@ -6,6 +6,7 @@ import engine from 'store/src/store-engine';
 import store from 'store/storages/cookieStorage';
 import defaults from 'store/plugins/defaults';
 import expire from 'store/plugins/expire';
+import Rating from 'react-rating';
 
 import Api from '../../Utils/Api';
 import Layout from '../../Layouts/OneColum';
@@ -73,6 +74,7 @@ class Details extends Component<Props, State> {
                     <Fragment>
                         {details.title}
                         <span className='date'>({details.date})</span>
+                        <Rating readonly stop={10} step={2} placeholderRating={details.rating} />
                     </Fragment>
                 }
                 content={
@@ -87,6 +89,9 @@ class Details extends Component<Props, State> {
                                 <div>
                                     {details.duration && <p>{details.duration}</p>}
                                     {genres && <p><strong>Genres:</strong> {genres}</p>}
+                                    {details.homepage &&
+                                    <p><a href={details.homepage} target='_blank' rel='noopener noreferrer'>Homepage</a></p>
+                                    }
                                 </div>
                                 {(details.creators && details.creators.length > 0) &&
                                     <div className='creators'>
@@ -104,9 +109,12 @@ class Details extends Component<Props, State> {
                         {details.videos.length && <div className='videos'>
                             <h2>Videos</h2>
                             {details.videos.map((video, index) => (
-                                <iframe key={`video-${index}`} title={`${details.title}-${index}`} width="560" height="315" src={video} frameBorder='0'
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen></iframe>
+                                <div key={`video-${index}`} className='video-container'>
+                                    <iframe title={`${details.title}-${index}`} width='560' height='315'
+                                        src={video} frameBorder='0'
+                                        allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+                                        allowFullScreen></iframe>
+                                </div>
                             ))}
                         </div>}
                     </Fragment>
