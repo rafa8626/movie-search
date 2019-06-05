@@ -26,7 +26,7 @@ type State = {
     config: Object,
 }
 
-class Main extends Component<Props, State> {
+export class Main extends Component<Props, State> {
     api: Api;
 
     cookie: engine;

@@ -23,7 +23,6 @@ type Props = {
     match: {
         params: Object,
     },
-    item: Object,
 };
 
 type State = {
