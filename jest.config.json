@@ -2,7 +2,7 @@
     "testURL": "https://medcore-api-dev.medsims.com",
     "setupFilesAfterEnv": ["jest-extended"],
     "moduleNameMapper": {
-        "\\.(css|jpg|png)$": "./src/Utils/EmptyModule.js"
+        "\\.(css|jpg|png)$": "jest-transform-stub"
     },
     "testRegex": "./src/.*.test.js$",
     "collectCoverage": true,
