@@ -9,9 +9,10 @@ import expire from 'store/plugins/expire';
 import Rating from 'react-rating';
 
 import Api from '../../Utils/Api';
-import Layout from '../../Layouts/OneColum';
+import Layout from '../../Layouts/Hero/Hero';
 import { formatItemDetails } from '../../Utils/Formatters';
 import isEmpty from '../../Utils/Common';
+import detailsStyles from './Details.styles';
 
 /**
  * Item Details.
@@ -77,7 +78,7 @@ class Details extends Component<Props, State> {
                     </Fragment>
                 }
                 content={
-                    <Fragment>
+                    <div css={detailsStyles}>
                         <div className='details'>
                             <div className='poster'>
                                 <img src={details.poster} alt={details.title} />
@@ -116,7 +117,7 @@ class Details extends Component<Props, State> {
                                 </div>
                             ))}
                         </div>}
-                    </Fragment>
+                    </div>
                 }
             />
         );

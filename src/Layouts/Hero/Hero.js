@@ -5,6 +5,8 @@ import { jsx } from '@emotion/core';
 import type { Node } from 'react';
 import { Fragment } from 'react';
 
+import layoutStyles from './Hero.styles';
+
 type Props = {
     title: string | Object,
     content: Node,
@@ -12,8 +14,8 @@ type Props = {
     hero?: Node,
 };
 
-const OneColumn = (props: Props) => (
-    <Fragment>
+const Hero = (props: Props) => (
+    <div css={layoutStyles}>
         <header>
             <div className='title'>
                 <h1>{props.title}</h1>
@@ -29,7 +31,7 @@ const OneColumn = (props: Props) => (
         <footer>
             <p>Copyright &copy; {new Date().getFullYear()}</p>
         </footer>
-    </Fragment>
+    </div>
 );
 
-export default OneColumn;
+export default Hero;

@@ -9,7 +9,7 @@ import defaults from 'store/plugins/defaults';
 import expire from 'store/plugins/expire';
 import defaultStore from 'store';
 
-import Layout from '../../Layouts/OneColum';
+import Layout from '../../Layouts/Hero/Hero';
 import Search from '../../Components/Search/Search';
 import * as itemActions from '../../Store/Item/Item';
 import mainStyles from './Main.styles';

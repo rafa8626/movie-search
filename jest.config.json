@@ -1,12 +1,13 @@
 {
     "testURL": "https://medcore-api-dev.medsims.com",
-    "setupFiles": [
-        "./src/Utils/JestMocks.js"
-    ],
     "setupFilesAfterEnv": ["jest-extended"],
+    "moduleNameMapper": {
+        "\\.(css|jpg|png)$": "./src/Utils/EmptyModule.js"
+    },
     "testRegex": "./src/.*.test.js$",
     "collectCoverage": true,
     "coveragePathIgnorePatterns": [
+        "./src/Utils/EmptyModule.js",
         "./src/*/.*.(styles|props|.stories).js",
         "./node_modules/*"
     ],
