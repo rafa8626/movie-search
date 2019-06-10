@@ -38,10 +38,10 @@ export const addItem = (item: Object) => (dispatch: Function) => {
  * @param {number} movieId
  * @returns {void}
  */
-export const removeItem = (itemId: number) => (dispatch: Function) => {
+export const removeItem = (itemId: number, type: 'movie' | 'tv') => (dispatch: Function) => {
     dispatch({
         type: ITEM_REMOVE,
-        payload: itemId,
+        payload: { itemId, type, }
     });
 };
 
@@ -88,7 +88,7 @@ export default function movieSearch(state: Object = initialState, action: Object
                 items: [...state.items, action.payload]
             };
         case ITEM_REMOVE:
-            const idx = state.items.findIndex(item => item.id === action.payload);
+            const idx = state.items.findIndex(item => item.id === action.payload.itemId && item.type === action.payload.type);
             if (idx > -1) {
                 return {
                     ...state,
@@ -97,15 +97,17 @@ export default function movieSearch(state: Object = initialState, action: Object
             }
             return state;
         case ITEM_LOAD_DETAILS:
-            const details = action.payload.details[action.payload.type].find(item => item.id === action.payload.itemId);
-            if (details) {
-                return {
-                    ...state,
-                    currentItem: {
-                        ...state.currentItem,
-                        ...details,
-                    }
-                };
+            if (state.details[action.payload.type]) {
+                const details = state.details[action.payload.type].find(item => item.id === action.payload.itemId);
+                if (details) {
+                    return {
+                        ...state,
+                        currentItem: {
+                            ...state.currentItem,
+                            ...details,
+                        }
+                    };
+                }
             }
             return state;
         case ITEM_SAVE_DETAILS:

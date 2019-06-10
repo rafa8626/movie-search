@@ -3,7 +3,6 @@
 // @flow
 import { jsx } from '@emotion/core';
 import type { Node } from 'react';
-import { Fragment } from 'react';
 
 import layoutStyles from './Hero.styles';
 

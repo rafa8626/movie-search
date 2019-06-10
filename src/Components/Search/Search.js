@@ -25,9 +25,26 @@ type State = {
     options: Array<Object>,
 };
 
+/**
+ *
+ *
+ * @class Search
+ * @extends {Component<Props, State>}
+ */
 class Search extends Component<Props, State> {
+    /**
+     *
+     *
+     * @type {*}
+     * @memberof Search
+     */
     typeaheadRef: *;
 
+    /**
+     * Creates an instance of Search.
+     *
+     * @memberof Search
+     */
     constructor() {
         super();
         this.setTypeaheadRef = this.setTypeaheadRef.bind(this);
@@ -49,14 +66,39 @@ class Search extends Component<Props, State> {
         options: [],
     }
 
+    /**
+     *
+     *
+     * @memberof Search
+     */
     setTypeaheadRef: (typeahead: *) => void
 
+    /**
+     *
+     *
+     * @memberof Search
+     */
     onChange: (item: Array<Object>) => void
 
+    /**
+     *
+     *
+     * @memberof Search
+     */
     formatMenuItems: (option: Object, props: Object) => void
 
+    /**
+     *
+     *
+     * @memberof Search
+     */
     searchItem: (query: string) => void
 
+    /**
+     *
+     *
+     * @memberof Search
+     */
     handleOptionChange: (e: Object) => void
 
     /**
@@ -97,7 +139,14 @@ class Search extends Component<Props, State> {
         }
     }
 
-    handleOptionChange(e: Object) {
+    /**
+     * Store in state value of selected option.
+     *
+     * @param {Event} e
+     * @returns {void}
+     * @memberof Search
+     */
+    handleOptionChange(e: Event) {
         this.setState({ type: e.target.value });
     }
 
@@ -121,7 +170,6 @@ class Search extends Component<Props, State> {
     /**
      * Callback to request API to search for items asynchronously.
      *
-     * It will determine also which items must be disabled.
      *
      * @param {string} query
      * @returns {void}
